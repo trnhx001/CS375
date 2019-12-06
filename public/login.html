@@ -87,10 +87,12 @@ body {
 </div>
 <div class="login-block">
         <h1>Login</h1>
-        <input type="text" value="" placeholder=" Drexel Username" id="username" />
-        <input type="password" value="" placeholder="Password" id="password" />
-        <button>Submit</button>
-        <a href='#'>or sign up:</a><br>
+        <form method=post action='/login'>
+          <input type="text" value="" placeholder=" Drexel Username" id="username" />
+          <input type="password" value="" placeholder="Password" id="password" />
+          <input type=submit value=Login>
+        </form>
+        <a href='signup.html'>or sign up:</a><br>
         <a href='index.html'>main page:</a><br>
         <a href='subs.html'>subjects page:</a>
 </div>
