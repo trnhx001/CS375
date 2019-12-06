@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+        <title>Sending Email Confirmation</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+            var from,to,subject,text;
+            // $("#send_email").click(function(){
+            $("#target").submit(function(){         
+                emailAddress=$("#emailAddress").val();     
+                $("#message").text("Sending E-mail...Please wait");
+                $.get("http://localhost:3000/send",{emailAddress:emailAddress},function(data){
+                if(data=="sent")
+                {
+                    $("#message").empty().html("<p>Email is been sent at "+to+" . Please check inbox !</p>");
+                }
+
+        });
+            });
+        });
+        </script>
+</head>
+
+<body>
+    <form id="target">
+        <div class="emailBox">
+          <label for="emailAddress">Your e-mail address</label><br>
+          <input id="emailAddress" type="email" size="64" maxLength="64" required
+                 pattern=".+@drexel.edu"
+                 title="Please provide your Drexel e-mail address">
+        </div>
+        <input id= "send_email" type="submit" value="Send Email Confirmation">
+    </form>
+    <span id="message"></span>
+</body>
+</html>
