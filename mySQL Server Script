@@ -1,0 +1,57 @@
+CREATE TABLE Classes (
+	classID int(10) AUTO_INCREMENT,
+	subject varchar(50),
+	classname varchar(20),
+	PRIMARY KEY (classID)
+);
+
+CREATE TABLE Topics (
+	topicID int(10) AUTO_INCREMENT,
+	classID int(10),
+	name varchar(50),
+	PRIMARY KEY (topicID),
+	FOREIGN KEY (classID) REFERENCES Classes(classID)
+);
+
+CREATE TABLE Threads (
+	threadID int(10) AUTO_INCREMENT,
+	topicID int(10),
+	name varchar(50),
+	text varchar(10000),
+	creatorName varchar(30),
+	dateCreated datetime,
+	PRIMARY KEY (threadID),
+	FOREIGN KEY (topicID) REFERENCES Topics(topicID)
+);
+
+CREATE TABLE Comments (
+	commentID int(10) AUTO_INCREMENT,
+	threadID int(10),
+	text varchar(10000),
+	PRIMARY KEY (commentID),
+	FOREIGN KEY (threadID) REFERENCES Threads(threadID)
+);
+
+CREATE TABLE Users (
+	userID int AUTO_INCREMENT PRIMARY KEY,
+	name varchar(50),
+	password varchar(50),
+	email varchar(100)
+);
+
+CREATE TABLE moderatorPermissions
+(
+	userID int(10) NOT NULL,
+	classID int(10) NOT NULL,
+	FOREIGN KEY (userID) REFERENCES Users(userID),
+	FOREIGN KEY (classID) REFERENCES Classes(classID),
+	PRIMARY KEY (userID, classID)
+);
+
+INSERT INTO classes (subject, className) VALUES ("CS 375", "Intro to Web Design");
+
+INSERT INTO topics (classID, name) VALUES (1, "Javascript is broken");
+
+INSERT INTO threads (topicID, name, text, creatorName, dateCreated) VALUES (1, "Phil is a doofus", "What a doofus, dang he is a doofus", "Philip Jones", 20190419);
+
+INSERT INTO threads (topicID, name, text, creatorName, dateCreated) VALUES (1, "Another Thread", "whoaaaaaa", "Philip Jones", 20190419);

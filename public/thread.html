@@ -1,0 +1,328 @@
+<html>
+<head>
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<!-- Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<title>thread page</title>
+<style>
+body {
+  background-color:rgb(209, 229, 248) ;
+}
+.headernav {
+    height: 65px;
+    background: rgb(235, 234, 234);
+    border-bottom: 3px solid #c9cccd;
+    margin: 10px;
+    font-size: 25px;
+    padding: 10px;
+    border-top: 1px solid #c9cccd;
+}
+.userinfo {
+    border-radius: 6px;
+    border-top: 13px solid rgb(130, 144, 170);
+    padding: 10px;
+}
+.textbox {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    padding: 20px;
+}
+.textbox textarea {
+    border: none;
+    box-shadow: none;
+    background-color: #f1f1f1;
+    widows: 100%;
+}
+.botwrap {
+    border-bottom: 8px solid rgb(130, 144, 170);
+    border-radius: 3px;
+    margin-bottom: 95px;
+    
+}
+.botwrap button {
+    margin: 10px;
+}
+.post {
+    background-color:rgb(218, 228, 238) ;
+}
+.posttext {
+    border-radius: 10px; 
+    padding: 10px;
+}
+.thread {
+    background-color:rgb(237, 244, 250);
+}
+.thread .botwrap {
+    border-bottom: 1px solid rgb(130, 144, 170);
+    border-radius: 3px;
+    margin-bottom: 30px;
+}
+.thread .userinfo {
+    border-radius: 6px;
+    border-top: 7px solid rgb(164, 174, 194);
+    padding: 10px;
+}
+.thread a {
+    color: rgb(51, 46, 54);
+}
+.sidebarblock {
+    background-color:rgb(218, 228, 238) ;
+    border-radius: 5px;
+    border-top: 13px solid rgb(130, 144, 170);
+    margin-top: 25px;
+    border-bottom: 5px solid rgb(130, 144, 170);
+    padding: 25px;
+}
+.lists {
+    font-size: 25px;
+    color:rgb(218, 228, 238);
+}
+.lists a {
+    color: rgb(94, 103, 119);  
+}
+footer {
+    height: 69px;
+    line-height: 69px;
+    color:#363838;
+    background: rgb(235, 234, 234);
+    border-top: 3px solid #c9cccd;
+    font-size: 20px;
+    border-bottom: 1px solid #c9cccd;
+    margin: 10px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+</style>
+</head>
+<body onload='thread()'>
+<div class="headernav">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-3 col-xs-9 col-sm-5 col-ms-3"></div>
+        <div class="col-lg-23 col-xs-9 col-sm-5 col-ms-3">Welcome to Drexel Forum</div>
+        <div class="col-lg-3 col-xs-9 col-sm-5 col-ms-3"><a target='_blank' href='us.html'>Learn more?</a></div>
+        </div>
+    </div>
+</div>
+
+<section class="content">
+<div class="container">
+<div class="row">
+    <div class="col-lg-8 col-md-8" id="">
+        <div class="" id="display"></div><br>
+        <div class="" id="replyComment"></div><br>
+        <!--<div class="thread" id="">
+            <div class="topwrap">
+            <div class="userinfo pull-left">
+                <h3 id="username">Someone</h3>
+                <p id="information">Blah Blah Blah blah blah blah blah</p>
+            </div>
+            </div>
+            <div class="botwrap "></div>
+        </div>-->
+
+        <div class="post" id="answer">
+        </div>
+    </div>
+    <div class="col-lg-4 col=md-4">
+        <div class="sidebarblock">
+        <h3>Navigation</h3>     
+        <ul class="lists">
+            <li><a href="index.html">Main Page</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="us.html">Get Help</a></li>
+            <li><a href="#">Log Out</a></li>
+        </ul>
+        </div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+    <div class="row">
+    <div class="col-lg-8 col-xs-9 col-sm-5">Copyrights 2019,  kill u all :)</div>  
+    </div>
+</div>
+</footer>
+<script>
+var d = Date();
+document.getElementById("date").innerHTML = d;
+
+//the threaaaaaadsss!!!
+function thread(){
+    let params = new URLSearchParams(location.search);
+    var topicID = params.get('topicID');
+
+    var keyValueTopicID = {"topicID": topicID};
+
+    document.getElementById("display").innerHTML = '';
+    document.getElementById("replyComment").innerHTML = '';
+    var URL = "./threads";
+    console.log("I'm here")
+    $.ajax({
+    type : "GET",
+    url : URL,
+    contentType:  "application/json; charset=utf-8",
+    data: keyValueTopicID,
+    dataType: "text",
+    success: function(msg) {
+    var y =  JSON.parse(msg);
+    console.log(msg);
+    popThread(y);
+    threadBox(y);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+        console.log(xhr);
+    }
+    });
+
+    function popThread(g){
+        console.log("I'm here again")
+        for (var y = 0; y < g.length; y++){
+            var fullname = g[y].creatorName;
+            var contents = g[y].text;
+            var threadID = g[y].threadID;
+            var pop = "<div class='thread' id=''><div class='topwrap'><div class='userinfo pull-left'><h3 id='username'><a href='#' onclick=\"oneThread('" +fullname+"','"+contents +"','"+threadID+"')\">"+fullname+"</a></h3><p id='information'>"+contents+"</p></div></div><div class='botwrap'></div></div>";
+            document.getElementById("display").innerHTML += pop;                                                          
+        }
+
+    }
+}
+//specific thread
+function oneThread(a, b, c){
+    var pop2 = "<div class='thread' id=''><div class='topwrap'><div class='userinfo pull-left'><h3 id='username'>"+a+"</h3><p id='information'>"+b+"</p></div></div><div class='botwrap'><button onclick='thread()' class='btn btn-info btn-sm' type='submit'>Go Back</button></div></div>";
+    document.getElementById("display").innerHTML = pop2;
+    getPost(c);
+    replyBox(a);
+}
+
+//the commmeentttssss
+function reply(){
+    var recontent = document.getElementById("reply").value;
+    comment(recontent);
+}
+
+function comment(a) {
+    
+    let params = new URLSearchParams(location.search);
+    var topicID = params.get('topicID');
+
+    var URL = "./addComment"
+    var info = {"threadID" : topicID, "text": a};
+    $.ajax({
+        type : "GET",
+        url : URL,
+        contentType:  "application/json; charset=utf-8",
+        dataType: "text",
+        data: info,
+        success: function(msg) {
+        var x =  JSON.parse(msg);
+        postIt([{"text": a}]);
+        console.log(msg);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr);
+        }
+    });
+}
+
+function getPost(x) {
+    var URL = "./getComments";
+    var info = {"threadID" : x};
+    $.ajax({
+        type : "GET",
+        url : URL,
+        contentType:  "application/json; charset=utf-8",
+        dataType: "text",
+        data: info,
+        success: function(msg) {
+        var x =  JSON.parse(msg);
+        postIt(x);
+        console.log(msg);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr);
+        }
+    });
+
+}
+
+function postIt(g){
+    for (var y = 0; y < g.length; y++){
+        var post = "<div class='thread' id=''><div class='topwrap'><div class='userinfo pull-left'>";
+        var midpost = "<h3 id='username'>PLACEHOLDER</h3><p id='information'>"+ g[y].text +"</p>";
+        var endpost = "</div></div><div class='botwrap'></div></div>";
+        post += midpost;
+        post += endpost;
+        document.getElementById("replyComment").innerHTML += post;
+    }}
+
+//retrieve thread info 
+function addThread(){
+    var addthread = document.getElementById("newthread").value;
+    createThread("PLACEHOLDER", name);
+}
+//send the thread to server 
+function createThread(a, b){
+    let params = new URLSearchParams(location.search);
+    var topicID = params.get('topicID');
+
+    var today = new Date();
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+
+    var URL = "./postThread"
+    var thread1 = {"topicID": topicID, "name":b, "text":a, "creatorName": "PLACEHOLDER", "dateCreated" : yyyy+mm+dd}; 
+    $.ajax({
+        type : "GET",
+        url : URL,
+        contentType:  "application/json; charset=utf-8",
+        dataType: "text",
+        data: "{}",
+        success: function(msg) {
+        var x =  JSON.parse(msg);
+        console.log(msg);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr);
+        }
+    });
+}
+
+//creat a threadbox, call it in the thread() function 
+function threadBox(x){
+    var start = "<div class='topwrap'><div class='userinfo pull-left'><h3 id='postname'>User Name</h3><p id='date'></p></div><div class='posttext pull-left'><div class='textbox'><textarea value='' rows='3' cols='60' id='newthread' placeholder='type your thread here'></textarea></div></div></div><div class='botwrap'><button onclick='addThread()' class='btn btn-info' type='submit'>Post a Thread</button></div>";
+    document.getElementById("answer").innerHTML = start;
+}
+
+function replyBox(x){
+    var start = "<div class='topwrap'><div class='userinfo pull-left'><h3 id='postname'>User Name</h3><p id='date'></p></div><div class='posttext pull-left'><div class='textbox'><textarea value='' rows='3' cols='60' id='reply' placeholder='type your reply here'></textarea></div></div></div><div class='botwrap'><button onclick='reply()' class='btn btn-info' type='submit'>Post a Thread</button></div>";
+    document.getElementById("answer").innerHTML = start;
+}
+
+</script>
+</body>
+</html>
