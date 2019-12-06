@@ -205,7 +205,7 @@ function oneThread(a, b, c){
     var pop2 = "<div class='thread' id=''><div class='topwrap'><div class='userinfo pull-left'><h3 id='username'>"+a+"</h3><p id='information'>"+b+"</p></div></div><div class='botwrap'><button onclick='thread()' class='btn btn-info btn-sm' type='submit'>Go Back</button></div></div>";
     document.getElementById("display").innerHTML = pop2;
     getPost(c);
-    replyBox(a);
+    replyBox(a, c);
 }
 
 //the commmeentttssss
@@ -318,9 +318,10 @@ function threadBox(x){
     document.getElementById("answer").innerHTML = start;
 }
 
-function replyBox(x){
+function replyBox(x, y){
     var start = "<div class='topwrap'><div class='userinfo pull-left'><h3 id='postname'>User Name</h3><p id='date'></p></div><div class='posttext pull-left'><div class='textbox'><textarea value='' rows='3' cols='60' id='reply' placeholder='type your reply here'></textarea></div></div></div><div class='botwrap'><button onclick='reply()' class='btn btn-info' type='submit'>Post a Thread</button></div>";
     document.getElementById("answer").innerHTML = start;
+    getPost(y);
 }
 
 </script>
